@@ -1,15 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-
-type Todo = {
-  id: string
-  text: string
-}
-
-const createId = () =>
-  typeof crypto !== 'undefined' && 'randomUUID' in crypto
-    ? crypto.randomUUID()
-    : `${Date.now()}-${Math.random().toString(16).slice(2)}`
+import { createId } from './utils/id'
+import type { Todo } from './types/todo'
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([])
