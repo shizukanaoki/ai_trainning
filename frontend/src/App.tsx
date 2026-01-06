@@ -64,76 +64,114 @@ function App() {
     }
   }
 
+  const hasTodos = todos.length > 0
+
   return (
     <div className="app">
+      <div className="app__glow app__glow--primary" />
+      <div className="app__glow app__glow--secondary" />
+
       <header className="app__header">
-        <p className="app__eyebrow">Simple Todo</p>
-        <h1>今日やること</h1>
-        <p className="app__subtitle">追加と削除だけのシンプル版。</p>
+        <div className="app__badge">NEO TODO SYSTEM</div>
+        <div className="app__title-group">
+          <h1>未来のタスクダッシュボード</h1>
+          <p className="app__subtitle">
+            AI と人の手でミニマルに管理。今日の集中ポイントを洗練された UI で。
+          </p>
+        </div>
+        <div className="app__chips">
+          <span className="app__chip">Live sync</span>
+          <span className="app__chip app__chip--muted">{todos.length} 件の TODO</span>
+        </div>
       </header>
 
-      <form className="todo-form agent-form" onSubmit={handleGenerate}>
-        <label className="todo-form__label" htmlFor="agent-input">
-          やりたいこと
-        </label>
-        <div className="todo-form__row">
-          <input
-            id="agent-input"
-            className="todo-form__input"
-            type="text"
-            value={prompt}
-            onChange={(event) => setPrompt(event.target.value)}
-            placeholder="例: 週末に引っ越し準備をしたい"
-            autoComplete="off"
-          />
-          <button className="todo-form__button" type="submit" disabled={isGenerating}>
-            {isGenerating ? '生成中...' : 'TODO を生成'}
-          </button>
-        </div>
-        {error ? <p className="agent-status">{error}</p> : null}
-      </form>
+      <div className="app__grid">
+        <form className="panel panel--accent" onSubmit={handleGenerate}>
+          <div className="panel__header">
+            <p className="panel__label">AI Assist</p>
+            <h2>アイデアから TODO を生成</h2>
+            <p className="panel__description">
+              やりたいことを一文で入力すると、実行可能なタスクに分解します。
+            </p>
+          </div>
+          <div className="panel__fields">
+            <input
+              id="agent-input"
+              className="input"
+              type="text"
+              value={prompt}
+              onChange={(event) => setPrompt(event.target.value)}
+              placeholder="例: 週末に引っ越し準備を完了したい"
+              autoComplete="off"
+            />
+            <button className="button button--primary" type="submit" disabled={isGenerating}>
+              {isGenerating ? '生成中...' : 'TODO を生成'}
+            </button>
+          </div>
+          {error ? <p className="panel__status">{error}</p> : null}
+        </form>
 
-      <form className="todo-form" onSubmit={handleSubmit}>
-        <label className="todo-form__label" htmlFor="todo-input">
-          TODO
-        </label>
-        <div className="todo-form__row">
-          <input
-            id="todo-input"
-            className="todo-form__input"
-            type="text"
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-            placeholder="例: 牛乳を買う"
-            autoComplete="off"
-          />
-          <button className="todo-form__button" type="submit">
-            追加
-          </button>
-        </div>
-      </form>
+        <form className="panel" onSubmit={handleSubmit}>
+          <div className="panel__header">
+            <p className="panel__label">Manual</p>
+            <h2>自分で TODO を追加</h2>
+            <p className="panel__description">手早く一件ずつ登録できます。</p>
+          </div>
+          <div className="panel__fields">
+            <input
+              id="todo-input"
+              className="input"
+              type="text"
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+              placeholder="例: 牛乳を買う"
+              autoComplete="off"
+            />
+            <button className="button" type="submit">
+              追加
+            </button>
+          </div>
+        </form>
+      </div>
 
-      {todos.length === 0 ? (
-        <div className="todo-empty">
-          <p>まだTODOはありません。</p>
-          <span>上のフォームから追加してください。</span>
+      <section className="panel panel--list">
+        <div className="panel__header panel__header--row">
+          <div>
+            <p className="panel__label">Live board</p>
+            <h2>TODO リスト</h2>
+            <p className="panel__description">削除すると即座に反映されます。</p>
+          </div>
+          <div className="counter">
+            <span className="counter__value">{todos.length}</span>
+            <span className="counter__label">items</span>
+          </div>
         </div>
-      ) : (
-        <ul className="todo-list">
-          {todos.map((todo) => (
-            <li key={todo.id} className="todo-item">
-              <span className="todo-item__text">{todo.text}</span>
-              <button
-                className="todo-item__delete"
-                type="button"
-                onClick={() => handleDelete(todo.id)}
-              >
-                削除
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+
+        {hasTodos ? (
+          <ul className="todo-list">
+            {todos.map((todo) => (
+              <li key={todo.id} className="todo-item">
+                <div className="todo-item__content">
+                  <span className="todo-item__text">{todo.text}</span>
+                  <span className="todo-item__meta">手動 &amp; AI 生成に対応</span>
+                </div>
+                <button
+                  className="todo-item__delete"
+                  type="button"
+                  onClick={() => handleDelete(todo.id)}
+                >
+                  削除
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="todo-empty">
+            <p>TODO はまだありません</p>
+            <span>上のフォームから作成すると、ここに未来的なリストが並びます。</span>
+          </div>
+        )}
+      </section>
     </div>
   )
 }
