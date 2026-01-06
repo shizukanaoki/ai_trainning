@@ -1,8 +1,12 @@
 Repo structure (key paths):
-- src/App.tsx: main TODO UI/component
-- src/main.tsx: app entrypoint
-- src/App.css, src/index.css: styles
-- public/: static assets
-- vite.config.ts: Vite config
-- package.json: scripts & deps
+- frontend/: Vite React app
+  - frontend/src/App.tsx, frontend/src/main.tsx
+  - frontend/src/App.css, frontend/src/index.css
+  - frontend/vite.config.ts, frontend/tsconfig.*
+- api/: Express + TypeScript
+  - api/src/server.ts
+  - api/tsconfig.json
+  - api/.env.example
+- package.json: workspace root scripts
+- package-lock.json: root lockfile
 - .serena/project.yml: Serena project config

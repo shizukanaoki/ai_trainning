@@ -1,7 +1,8 @@
-Common commands (npm):
-- dev server: npm run dev
-- build: npm run build
-- preview build: npm run preview
-- lint: npm run lint
+Common commands (npm workspaces):
+- frontend dev: npm run dev
+- api dev: npm run dev:api
+- build both: npm run build
+- lint frontend: npm run lint
+- preview frontend: npm run preview
 
-No test or formatter scripts configured.
+API env: create api/.env with OPENAI_API_KEY before running api.
