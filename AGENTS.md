@@ -40,3 +40,6 @@ For PRs, include a short description, testing notes, and screenshots for UI chan
 ## Security & Configuration Tips
 - Do not commit secrets. Add real keys to `api/.env` (ignored by git).
 - Template lives at `api/.env.example`.
+
+## Review Guidelines
+Always review in Japanese.

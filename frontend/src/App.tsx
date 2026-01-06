@@ -67,7 +67,7 @@ function App() {
   return (
     <div className="app">
       <header className="app__header">
-        <p className="app__eyebrow">Tiny Todo</p>
+        <p className="app__eyebrow">Simple Todo</p>
         <h1>今日やること</h1>
         <p className="app__subtitle">追加と削除だけのシンプル版。</p>
       </header>
