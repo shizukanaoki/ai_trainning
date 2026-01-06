@@ -1,14 +1,26 @@
 .app {
-  width: min(640px, 100%);
-  margin: 0 auto;
-  padding: 64px 24px 80px;
+  width: min(960px, 100% - 32px);
+  margin: 48px auto;
+  padding: 48px 40px 64px;
   display: grid;
-  gap: 28px;
+  gap: 32px;
+  background: rgba(255, 255, 255, 0.24);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 28px;
+  box-shadow: 0 24px 80px rgba(6, 8, 30, 0.35), 0 12px 24px rgba(6, 8, 30, 0.12);
+}
+
+.hero {
+  display: grid;
+  gap: 12px;
+  padding: 8px 4px 4px;
 }
 
 .app__header {
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 
 .app__eyebrow {
@@ -23,6 +35,38 @@
   margin: 0;
   color: var(--muted);
   font-size: 1rem;
+  max-width: 58ch;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero__button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f0b1b;
+  background: linear-gradient(120deg, #ffd89b, #ff9a9e 45%, #a18cd1);
+  box-shadow: 0 16px 40px rgba(255, 138, 91, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.hero__button:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 24px 52px rgba(255, 138, 91, 0.45);
+  filter: brightness(1.03);
+}
+
+.hero__support {
+  color: rgba(31, 27, 41, 0.75);
+  font-size: 0.95rem;
 }
 
 .todo-form {
@@ -139,6 +183,21 @@
 }
 
 @media (max-width: 560px) {
+  .app {
+    padding: 32px 20px 48px;
+    margin: 28px auto;
+  }
+
+  .hero__cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero__button {
+    width: 100%;
+    text-align: center;
+  }
+
   .todo-form__row {
     grid-template-columns: 1fr;
   }
